@@ -52,6 +52,7 @@ See [INSTALLATION.md](INSTALLATION.md) for full setup on Windows, macOS, and Lin
 | [docs/API.md](docs/API.md) | REST API reference |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Implementation roadmap |
 | [prompts.md](prompts.md) | AI development audit log |
+| [docs/PRESENTATION.md](docs/PRESENTATION.md) | Presentation deck (Markdown / Marp → PPTX) |
 | [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) | Final submission verification |
 
 ## API endpoints (summary)

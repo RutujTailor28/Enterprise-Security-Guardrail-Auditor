@@ -410,3 +410,23 @@ Prepare project for submission. Generate: README.md, INSTALLATION.md, ARCHITECTU
 **Git:** Exact push commands provided in README response (init in project dir if repo root is user home).
 
 **Elapsed time:** ~20 minutes (submission preparation phase).
+
+---
+
+## Entry 12 — 2026-06-17
+
+### User Prompt
+
+Did you create AI-generated Presentation Deck (PPT or Markdown solution)?
+
+### Assistant Response Summary
+
+**No** — the presentation deck was not included in Entry 11 submission prep (gap identified).
+
+**Created:** `docs/PRESENTATION.md` — 20-slide Marp-compatible Markdown deck. **Exported:** `docs/PRESENTATION.pptx` via Marp CLI.
+
+**Updated:** `README.md`, `SUBMISSION_CHECKLIST.md` with presentation deliverable.
+
+**Export to PPT:** `marp docs/PRESENTATION.md --pptx -o docs/PRESENTATION.pptx` (Marp CLI) or VS Code Marp extension.
+
+**Elapsed time:** ~10 minutes.

@@ -12,6 +12,8 @@ Use this checklist before submitting the Enterprise Security Guardrail Auditor c
 - [x] `docs/ROADMAP.md` — 7-phase development plan
 - [x] `prompts.md` — audit log with all user prompts and assistant summaries (Entries 1–11)
 - [x] `rules.md` — project rules (no manual edits, tests, clean architecture)
+- [x] `docs/PRESENTATION.md` — AI-generated presentation deck (Marp Markdown)
+- [x] `docs/PRESENTATION.pptx` — exported PowerPoint deck
 
 ## Challenge requirements (Entry 1 MVP)
 
@@ -104,6 +106,7 @@ rules.md
 backend/
 frontend/
 docs/
+  PRESENTATION.md
 scripts/
 .gitignore
 ```

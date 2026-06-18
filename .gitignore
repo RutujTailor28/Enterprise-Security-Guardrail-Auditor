@@ -7,7 +7,6 @@ dist/
 build/
 .venv/
 venv/
-.env
 .pytest_cache/
 .coverage
 htmlcov/
@@ -26,9 +25,9 @@ frontend/vite.config.js
 
 # IDE
 .idea/
-.vscode/
 *.swp
 
 # OS
 .DS_Store
 Thumbs.db
+config.bat
