@@ -1,0 +1,9 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Insecure public S3 bucket.
+
+Resources:
+  PublicLogsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: public-logs-cfn-insecure
+      AccessControl: PublicRead

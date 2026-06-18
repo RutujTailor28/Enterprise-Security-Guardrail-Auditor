@@ -1,0 +1,17 @@
+[project]
+name = "security-guardrail-auditor"
+version = "1.0.0"
+description = "Enterprise Security Guardrail Auditor API"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]

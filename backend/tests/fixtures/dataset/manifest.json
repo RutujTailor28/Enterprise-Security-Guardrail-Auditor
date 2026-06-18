@@ -1,0 +1,204 @@
+{
+  "version": "1.0.0",
+  "description": "Canonical IaC test dataset for the Security Guardrail Auditor",
+  "entries": [
+    {
+      "id": "tf-secure-baseline",
+      "path": "terraform/secure/baseline_secure.tf",
+      "format": "terraform",
+      "classification": "secure",
+      "description": "Private encrypted S3, restricted SG, encrypted RDS with backups",
+      "expected_rules": [],
+      "forbidden_rules": ["S3_PUBLIC", "SG_SSH_OPEN", "SG_RDP_OPEN", "IAM_WILDCARD", "DB_PUBLIC", "HARDCODED_SECRET"]
+    },
+    {
+      "id": "tf-secure-network",
+      "path": "terraform/secure/secure_network.tf",
+      "format": "terraform",
+      "classification": "secure",
+      "description": "Security groups with trusted CIDR ingress only",
+      "expected_rules": [],
+      "forbidden_rules": ["SG_SSH_OPEN", "SG_RDP_OPEN", "SG_OVERLY_PERMISSIVE"]
+    },
+    {
+      "id": "tf-secure-data",
+      "path": "terraform/secure/secure_data.tf",
+      "format": "terraform",
+      "classification": "secure",
+      "description": "Encrypted RDS with KMS and least-privilege IAM",
+      "expected_rules": [],
+      "forbidden_rules": ["IAM_WILDCARD", "DB_PUBLIC", "MISSING_ENCRYPTION", "MISSING_BACKUP"]
+    },
+    {
+      "id": "tf-insecure-public-s3",
+      "path": "terraform/insecure/public_s3.tf",
+      "format": "terraform",
+      "classification": "insecure",
+      "description": "S3 bucket with public-read ACL",
+      "expected_rules": ["S3_PUBLIC"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "tf-insecure-open-ssh",
+      "path": "terraform/insecure/open_ssh.tf",
+      "format": "terraform",
+      "classification": "insecure",
+      "description": "Security group exposing SSH to 0.0.0.0/0",
+      "expected_rules": ["SG_SSH_OPEN"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "tf-insecure-open-rdp",
+      "path": "terraform/insecure/open_rdp.tf",
+      "format": "terraform",
+      "classification": "insecure",
+      "description": "Security group exposing RDP to 0.0.0.0/0",
+      "expected_rules": ["SG_RDP_OPEN"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "tf-insecure-overly-permissive-sg",
+      "path": "terraform/insecure/overly_permissive_sg.tf",
+      "format": "terraform",
+      "classification": "insecure",
+      "description": "Security group allowing all TCP ports from the internet",
+      "expected_rules": ["SG_OVERLY_PERMISSIVE"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "tf-insecure-iam-wildcard",
+      "path": "terraform/insecure/iam_wildcard.tf",
+      "format": "terraform",
+      "classification": "insecure",
+      "description": "IAM policy with Action and Resource wildcards",
+      "expected_rules": ["IAM_WILDCARD"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "tf-insecure-hardcoded-secret",
+      "path": "terraform/insecure/hardcoded_secret.tf",
+      "format": "terraform",
+      "classification": "insecure",
+      "description": "Hardcoded database password in Terraform",
+      "expected_rules": ["HARDCODED_SECRET"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "tf-insecure-missing-encryption",
+      "path": "terraform/insecure/missing_encryption.tf",
+      "format": "terraform",
+      "classification": "insecure",
+      "description": "RDS and S3 without encryption at rest",
+      "expected_rules": ["MISSING_ENCRYPTION"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "tf-insecure-missing-logging",
+      "path": "terraform/insecure/missing_logging.tf",
+      "format": "terraform",
+      "classification": "insecure",
+      "description": "S3 bucket without access logging",
+      "expected_rules": ["MISSING_LOGGING", "MISSING_BACKUP"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "tf-insecure-missing-backup",
+      "path": "terraform/insecure/missing_backup.tf",
+      "format": "terraform",
+      "classification": "insecure",
+      "description": "RDS without backup retention and S3 without versioning",
+      "expected_rules": ["MISSING_BACKUP"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "tf-insecure-multi-risk",
+      "path": "terraform/insecure/multi_risk.tf",
+      "format": "terraform",
+      "classification": "insecure",
+      "description": "Multiple misconfigurations in a single Terraform stack",
+      "expected_rules": ["S3_PUBLIC", "SG_SSH_OPEN", "SG_OVERLY_PERMISSIVE", "IAM_WILDCARD", "HARDCODED_SECRET", "DB_PUBLIC", "MISSING_ENCRYPTION", "MISSING_BACKUP"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "cfn-secure-s3",
+      "path": "cloudformation/secure/secure_s3.yaml",
+      "format": "cloudformation",
+      "classification": "secure",
+      "description": "CloudFormation S3 with encryption, versioning, logging, and public access block",
+      "expected_rules": [],
+      "forbidden_rules": ["S3_PUBLIC", "MISSING_LOGGING", "MISSING_BACKUP"]
+    },
+    {
+      "id": "cfn-secure-rds",
+      "path": "cloudformation/secure/secure_rds.yaml",
+      "format": "cloudformation",
+      "classification": "secure",
+      "description": "Private encrypted RDS with backup retention",
+      "expected_rules": [],
+      "forbidden_rules": ["DB_PUBLIC", "MISSING_ENCRYPTION", "MISSING_BACKUP"]
+    },
+    {
+      "id": "cfn-secure-network",
+      "path": "cloudformation/secure/secure_network.yaml",
+      "format": "cloudformation",
+      "classification": "secure",
+      "description": "Restricted security group and least-privilege IAM in CloudFormation",
+      "expected_rules": [],
+      "forbidden_rules": ["SG_SSH_OPEN", "IAM_WILDCARD"]
+    },
+    {
+      "id": "cfn-insecure-public-s3",
+      "path": "cloudformation/insecure/public_s3.yaml",
+      "format": "cloudformation",
+      "classification": "insecure",
+      "description": "CloudFormation S3 bucket with PublicRead ACL",
+      "expected_rules": ["S3_PUBLIC"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "cfn-insecure-public-rds",
+      "path": "cloudformation/insecure/public_rds.json",
+      "format": "cloudformation",
+      "classification": "insecure",
+      "description": "Publicly accessible unencrypted RDS without backups",
+      "expected_rules": ["DB_PUBLIC", "MISSING_ENCRYPTION", "MISSING_BACKUP"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "cfn-insecure-iam-wildcard",
+      "path": "cloudformation/insecure/iam_wildcard.yaml",
+      "format": "cloudformation",
+      "classification": "insecure",
+      "description": "CloudFormation IAM policy with wildcard permissions",
+      "expected_rules": ["IAM_WILDCARD"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "cfn-insecure-open-ssh",
+      "path": "cloudformation/insecure/open_ssh.yaml",
+      "format": "cloudformation",
+      "classification": "insecure",
+      "description": "CloudFormation security group with SSH open to the world",
+      "expected_rules": ["SG_SSH_OPEN"],
+      "forbidden_rules": []
+    },
+    {
+      "id": "cfn-insecure-missing-encryption",
+      "path": "cloudformation/insecure/missing_encryption.yaml",
+      "format": "cloudformation",
+      "classification": "insecure",
+      "description": "Private S3 bucket without encryption in CloudFormation",
+      "expected_rules": ["MISSING_ENCRYPTION", "MISSING_LOGGING", "MISSING_BACKUP"],
+      "forbidden_rules": ["S3_PUBLIC"]
+    },
+    {
+      "id": "cfn-insecure-multi-risk",
+      "path": "cloudformation/insecure/multi_risk.yaml",
+      "format": "cloudformation",
+      "classification": "insecure",
+      "description": "Multiple CloudFormation misconfigurations in one template",
+      "expected_rules": ["S3_PUBLIC", "SG_SSH_OPEN", "SG_RDP_OPEN", "IAM_WILDCARD", "DB_PUBLIC", "MISSING_ENCRYPTION", "MISSING_BACKUP"],
+      "forbidden_rules": []
+    }
+  ]
+}

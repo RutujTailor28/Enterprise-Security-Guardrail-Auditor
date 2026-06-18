@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Multi-risk CloudFormation stack with several misconfigurations.
+
+Resources:
+  ExposedBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: multi-risk-cfn-insecure
+      AccessControl: PublicRead
+
+  EdgeSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: SSH and RDP exposed
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 3389
+          ToPort: 3389
+          CidrIp: 0.0.0.0/0
+
+  WildcardPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: multi-risk-admin-cfn
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action: '*'
+            Resource: '*'
+
+  PublicDatabase:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: multi-risk-db-cfn
+      Engine: postgres
+      PubliclyAccessible: true
+      StorageEncrypted: false
+      BackupRetentionPeriod: 0
